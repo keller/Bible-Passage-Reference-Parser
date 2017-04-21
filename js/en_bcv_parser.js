@@ -838,7 +838,11 @@
 
   })();
 
-  root.bcv_parser = bcv_parser;
+  if (((typeof module !== "undefined" && module !== null ? module.exports : void 0) != null)) {
+    module.exports = bcv_parser;
+  } else {
+    root.bcv_parser = bcv_parser;
+  }
 
   bcv_passage = (function() {
     function bcv_passage() {}
