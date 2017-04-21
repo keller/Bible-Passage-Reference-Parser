@@ -1,5 +1,5 @@
 # This class takes a string and identifies Bible passage references in that string. It's designed to handle how people actually type Bible passages and tries fairly hard to make sense of dubious possibilities.
-# 
+#
 # The aggressiveness is tunable, to a certain extent, using the below `options`. It's probably too aggressive for general text parsing (the "is 2" in "There is 2 much" becomes "Isa.2", for example).
 
 # Export to whatever the current context is.
@@ -345,7 +345,7 @@ class bcv_parser
 			# Either it's on its own or a translation sequence follows it, making it effectively on its own.
 			(passage.value.length == 1 or (passage.value.length > 1 and passage.value[1].type is "translation_sequence")) and
 			start_index_adjust == 0 and
-			(@passage.books[book_id].parsed.length == 1 or (@passage.books[book_id].parsed.length > 1 and 
+			(@passage.books[book_id].parsed.length == 1 or (@passage.books[book_id].parsed.length > 1 and
 			@passage.books[book_id].parsed[1].type is "translation")) and
 			/^[234]/.test @passage.books[book_id].parsed[0]
 				@create_book_range s, passage, book_id
@@ -717,4 +717,8 @@ class bcv_parser
 				break
 		true
 
-root.bcv_parser = bcv_parser
+if (module?.exports?)  # node.js module
+  module.exports = bcv_parser
+else # web
+  root.bcv_parser = bcv_parser
+
